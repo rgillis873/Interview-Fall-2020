@@ -1,5 +1,6 @@
 import moment from 'moment';
 import fetch from 'node-fetch';
+import { response } from 'express';
 
 export interface ILaunch {
   flight_number?: number;
@@ -54,6 +55,15 @@ export class Launches {
    * Helpers
    */
 
+   /**
+    * Makes api request for lanches in the range from start to end
+    * @param start 
+    * @param end 
+    */
+   async getLaunchRange(start: string, end:string): Promise<any[]>{
+     const res = await fetch(`${this.url}?start=${start}&end=${end}`);
+     return res.json();
+   }
   /**
    * Filters out desired fields
    * @param data
